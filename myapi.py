@@ -30,10 +30,10 @@ def index():
 @app.post("/summarize")
 async def summarize(request:Request):
     req = await request.json()
-    print(req)
+    
     text = req['request']
-    max_length = 6000
-
+    max_length = len(text)
+    
     preprocess_text = text.strip().replace("\n", "")
     t5_prepared_Text = "summarize: " + preprocess_text
     tokenized_text = tokenizer.encode(t5_prepared_Text, return_tensors="pt").to(device)
